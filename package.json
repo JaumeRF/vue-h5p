@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "files": [
-    "src/*"
+    "dist/*"
   ],
   "dependencies": {
     "toposort-class": "^1.0.1"
