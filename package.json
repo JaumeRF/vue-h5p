@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "files": [
-    "dist/*"
+    "./dist/*"
   ],
   "dependencies": {
     "toposort-class": "^1.0.1"
@@ -61,12 +61,12 @@
     "url": "https://github.com/technowledgy/vue-h5p.git"
   },
   "type": "module",
-  "main": "dist/cjs/vue-h5p.js",
+  "main": "./dist/cjs/vue-h5p.js",
   "exports": {
     ".": {
       "require": "dist/cjs/vue-h5p.js",
       "default": "dist/es/vue-h5p.js"
     }
   },
-  "module": "dist/es/vue-h5p.js"
+  "module": "./dist/es/vue-h5p.js"
 }
