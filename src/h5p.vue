@@ -139,6 +139,7 @@ export default {
 </html>`
 
     this.loading = false
+    this.$emit('loaded')
   },
   methods: {
     addEventHandlers () {
