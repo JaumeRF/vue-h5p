@@ -151,7 +151,6 @@ export default {
     },
     addEventHandlers () {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on('*', (ev) => {
-        console.log(ev.type.toLowerCase())
         this.$emit(ev.type.toLowerCase(), ev.data)
       })
     },
