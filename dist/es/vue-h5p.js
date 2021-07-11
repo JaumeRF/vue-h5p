@@ -247,7 +247,6 @@ const script = {
   </body>
 </html>`;
     this.loading = false;
-    this.$emit("loaded");
   },
   methods: {
     addEventHandlers() {
