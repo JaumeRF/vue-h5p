@@ -139,10 +139,19 @@ export default {
 </html>`
 
     this.loading = false
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy () {
+    // Unregister the event listener before destroying this Vue instance
+    window.removeEventListener('resize', this.onResize)
   },
   methods: {
+    onResize (event) {
+      this.$emit('resizedwindow', event)
+    },
     addEventHandlers () {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on('*', (ev) => {
+        console.log(ev.type.toLowerCase())
         this.$emit(ev.type.toLowerCase(), ev.data)
       })
     },

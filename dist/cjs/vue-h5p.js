@@ -254,10 +254,18 @@ const script = {
   </body>
 </html>`;
     this.loading = false;
+    window.addEventListener("resize", this.onResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
   methods: {
+    onResize(event) {
+      this.$emit("resizedwindow", event);
+    },
     addEventHandlers() {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on("*", (ev) => {
+        console.log(ev.type.toLowerCase());
         this.$emit(ev.type.toLowerCase(), ev.data);
       });
     },
