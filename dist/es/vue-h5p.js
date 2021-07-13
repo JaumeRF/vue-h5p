@@ -149,7 +149,7 @@ const script = {
       default: null
     },
     contentjson: {
-      type: Promise,
+      type: Object,
       default: null
     },
     src: {
