@@ -1,13 +1,4 @@
 import Toposort from "toposort-class";
-class FetchError extends Error {
-  constructor(resp, body) {
-    super(resp.statusText);
-    this.name = "FetchError";
-    this.resp = resp;
-    this.status = resp.status;
-    Object.assign(this, body);
-  }
-}
 var l10n = {
   H5P: {
     advancedHelp: "Include this script on your website if you want dynamic sizing of the embedded content:",
@@ -144,6 +135,14 @@ function normalizeComponent(scriptExports, render2, staticRenderFns2, functional
 const script = {
   name: "H5p",
   props: {
+    h5pjson: {
+      type: Object,
+      default: () => ({})
+    },
+    contentjson: {
+      type: Object,
+      default: () => ({})
+    },
     src: {
       type: String,
       required: true
@@ -194,8 +193,8 @@ const script = {
     let content;
     let libraries;
     try {
-      h5p2 = await this.getJSON("h5p.json");
-      content = await this.getJSON("content", "content.json");
+      h5p2 = this.h5pjson;
+      content = this.contentjson;
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
     } catch (e) {
       this.error = e;
@@ -260,18 +259,6 @@ const script = {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on("*", (ev) => {
         this.$emit(ev.type.toLowerCase(), ev.data);
       });
-    },
-    async getJSON(...url) {
-      const resp = await fetch(this.path + "/" + url.join("/"), {credentials: "include"});
-      if (!resp.ok) {
-        let body = {};
-        try {
-          body = await resp.json();
-        } catch {
-        }
-        throw new FetchError(resp, body);
-      }
-      return resp.json();
     },
     async loadDependencies(deps, libraryMap = {}) {
       await Promise.all(deps.map(async ({machineName, majorVersion, minorVersion}) => {

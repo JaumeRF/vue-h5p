@@ -27,6 +27,14 @@ import frameStyle from 'frame/style'
 export default {
   name: 'H5p',
   props: {
+    h5pjson: {
+      type: Object,
+      default: () => ({})
+    },
+    contentjson: {
+      type: Object,
+      default: () => ({})
+    },
     src: {
       type: String,
       required: true
@@ -77,8 +85,8 @@ export default {
     let content
     let libraries
     try {
-      h5p = await this.getJSON('h5p.json')
-      content = await this.getJSON('content', 'content.json')
+      h5p = this.h5pjson
+      content = this.contentjson
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
     } catch (e) {
       this.error = e
@@ -153,17 +161,6 @@ export default {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on('*', (ev) => {
         this.$emit(ev.type.toLowerCase(), ev.data)
       })
-    },
-    async getJSON (...url) {
-      const resp = await fetch(this.path + '/' + url.join('/'), { credentials: 'include' })
-      if (!resp.ok) {
-        let body = {}
-        try {
-          body = await resp.json()
-        } catch { /* eslint-disable-line no-empty */ }
-        throw new FetchError(resp, body)
-      }
-      return resp.json()
     },
     async loadDependencies (deps, libraryMap = {}) {
       await Promise.all(deps.map(async ({ machineName, majorVersion, minorVersion }) => {
