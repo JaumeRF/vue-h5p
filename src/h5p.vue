@@ -32,7 +32,7 @@ export default {
       default: null
     },
     contentjson: {
-      type: Object,
+      type: String,
       default: null
     },
     src: {
@@ -86,9 +86,9 @@ export default {
     let libraries
     try {
       h5p = await this.getJSON('h5p.json')
-      content = this.contentjson
-      
+      content = await this.getJSON('content', 'content.json')
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
+      console.log(h5p)
     } catch (e) {
       this.error = e
       this.loading = false

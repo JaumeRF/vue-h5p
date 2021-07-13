@@ -205,6 +205,7 @@ const script = {
       h5p2 = await this.getJSON("h5p.json");
       content = this.contentjson;
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
+      console.log(h5p2);
     } catch (e) {
       this.error = e;
       this.loading = false;
