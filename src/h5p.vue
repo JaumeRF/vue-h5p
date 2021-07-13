@@ -157,10 +157,22 @@ export default {
     onResize (event) {
       this.$emit('resizedwindow', event)
     },
+
     addEventHandlers () {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on('*', (ev) => {
         this.$emit(ev.type.toLowerCase(), ev.data)
       })
+    },
+    async getJSON (...url) {
+      const resp = await fetch(this.path + '/' + url.join('/'), { credentials: 'include' })
+      if (!resp.ok) {
+        let body = {}
+        try {
+          body = await resp.json()
+        } catch { /* eslint-disable-line no-empty */ }
+        throw new FetchError(resp, body)
+      }
+      return resp.json()
     },
     async loadDependencies (deps, libraryMap = {}) {
       await Promise.all(deps.map(async ({ machineName, majorVersion, minorVersion }) => {
