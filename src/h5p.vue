@@ -28,12 +28,12 @@ export default {
   name: 'H5p',
   props: {
     h5pjson: {
-      type: Object,
-      default: () => ({})
+      type: Promise,
+      default: null
     },
     contentjson: {
-      type: Object,
-      default: () => ({})
+      type: Promise,
+      default: null
     },
     src: {
       type: String,
@@ -86,8 +86,8 @@ export default {
     let libraries
     try {
       h5p = await this.getJSON('h5p.json')
-      content = await this.contentjson
-      console.log(content)
+      content = this.contentjson
+      
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
     } catch (e) {
       this.error = e

@@ -152,12 +152,12 @@ const script = {
   name: "H5p",
   props: {
     h5pjson: {
-      type: Object,
-      default: () => ({})
+      type: Promise,
+      default: null
     },
     contentjson: {
-      type: Object,
-      default: () => ({})
+      type: Promise,
+      default: null
     },
     src: {
       type: String,
@@ -210,8 +210,7 @@ const script = {
     let libraries;
     try {
       h5p2 = await this.getJSON("h5p.json");
-      content = await this.contentjson;
-      console.log(content);
+      content = this.contentjson;
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
     } catch (e) {
       this.error = e;
