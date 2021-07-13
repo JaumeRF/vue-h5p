@@ -172,6 +172,7 @@ export default {
         } catch { /* eslint-disable-line no-empty */ }
         throw new FetchError(resp, body)
       }
+      console.log(resp.json())
       return resp.json()
     },
     async loadDependencies (deps, libraryMap = {}) {
