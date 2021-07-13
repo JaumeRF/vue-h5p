@@ -27,15 +27,6 @@ import frameStyle from 'frame/style'
 export default {
   name: 'H5p',
   props: {
-<<<<<<< HEAD
-    h5pjson: {
-      type: Promise,
-      default: null
-    },
-    contentjson: {
-      type: String,
-      default: null
-=======
     content: {
       type: String,
       required: true
@@ -43,7 +34,6 @@ export default {
     h5pJSON: {
       type: String,
       required: true
->>>>>>> 25af0e0
     },
     src: {
       type: String,
