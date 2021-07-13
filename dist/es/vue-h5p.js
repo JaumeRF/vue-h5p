@@ -144,6 +144,14 @@ function normalizeComponent(scriptExports, render2, staticRenderFns2, functional
 const script = {
   name: "H5p",
   props: {
+    content: {
+      type: String,
+      required: true
+    },
+    h5pJSON: {
+      type: String,
+      required: true
+    },
     src: {
       type: String,
       required: true
@@ -191,11 +199,9 @@ const script = {
   },
   async mounted() {
     let h5p2;
-    let content;
     let libraries;
     try {
-      h5p2 = await this.getJSON("h5p.json");
-      content = await this.getJSON("content", "content.json");
+      h5p2 = await JSON.parse(this.h5pJSON);
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
     } catch (e) {
       this.error = e;
@@ -215,7 +221,7 @@ const script = {
           exportUrl: this.export,
           fullScreen: this.fullscreen,
           library: `${machineName} ${majorVersion}.${minorVersion}`,
-          jsonContent: JSON.stringify(content),
+          jsonContent: this.content,
           url: this.path,
           displayOptions: {
             frame: Boolean(this.export || this.embed || this.copyright || this.icon),
