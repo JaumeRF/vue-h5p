@@ -209,8 +209,8 @@ const script = {
     let content;
     let libraries;
     try {
-      h5p2 = this.h5pjson;
-      content = this.contentjson;
+      h5p2 = await this.getJSON("h5p.json");
+      content = await this.contentjson;
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
     } catch (e) {
       this.error = e;
@@ -286,6 +286,7 @@ const script = {
         }
         throw new FetchError(resp, body);
       }
+      console.log(resp.json());
       return resp.json();
     },
     async loadDependencies(deps, libraryMap = {}) {
