@@ -151,15 +151,6 @@ function normalizeComponent(scriptExports, render2, staticRenderFns2, functional
 const script = {
   name: "H5p",
   props: {
-<<<<<<< HEAD
-    h5pjson: {
-      type: Promise,
-      default: null
-    },
-    contentjson: {
-      type: Object,
-      default: null
-=======
     content: {
       type: String,
       required: true
@@ -167,7 +158,6 @@ const script = {
     h5pJSON: {
       type: String,
       required: true
->>>>>>> 25af0e0
     },
     src: {
       type: String,
@@ -218,12 +208,7 @@ const script = {
     let h5p2;
     let libraries;
     try {
-<<<<<<< HEAD
-      h5p2 = await this.getJSON("h5p.json");
-      content = this.contentjson;
-=======
       h5p2 = await JSON.parse(this.h5pJSON);
->>>>>>> 25af0e0
       libraries = await this.loadDependencies(h5p2.preloadedDependencies);
       console.log(h5p2);
     } catch (e) {
