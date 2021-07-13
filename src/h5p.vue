@@ -86,7 +86,6 @@ export default {
     try {
       h5p = await JSON.parse(this.h5pJSON)
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
-      console.log(h5p)
     } catch (e) {
       this.error = e
       this.loading = false
@@ -171,7 +170,6 @@ export default {
         } catch { /* eslint-disable-line no-empty */ }
         throw new FetchError(resp, body)
       }
-      console.log(resp.json())
       return resp.json()
     },
     async loadDependencies (deps, libraryMap = {}) {
