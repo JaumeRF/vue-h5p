@@ -27,6 +27,7 @@ import frameStyle from 'frame/style'
 export default {
   name: 'H5p',
   props: {
+<<<<<<< HEAD
     h5pjson: {
       type: Promise,
       default: null
@@ -34,6 +35,15 @@ export default {
     contentjson: {
       type: String,
       default: null
+=======
+    content: {
+      type: String,
+      required: true
+    },
+    h5pJSON: {
+      type: String,
+      required: true
+>>>>>>> 25af0e0
     },
     src: {
       type: String,
@@ -82,11 +92,9 @@ export default {
   },
   async mounted () {
     let h5p
-    let content
     let libraries
     try {
-      h5p = await this.getJSON('h5p.json')
-      content = await this.getJSON('content', 'content.json')
+      h5p = await JSON.parse(this.h5pJSON)
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
       console.log(h5p)
     } catch (e) {
@@ -108,7 +116,7 @@ export default {
           exportUrl: this.export,
           fullScreen: this.fullscreen,
           library: `${machineName} ${majorVersion}.${minorVersion}`,
-          jsonContent: JSON.stringify(content),
+          jsonContent: this.content,
           url: this.path,
           displayOptions: {
             frame: Boolean(this.export || this.embed || this.copyright || this.icon),
