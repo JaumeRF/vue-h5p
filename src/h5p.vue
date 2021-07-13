@@ -85,7 +85,7 @@ export default {
     let content
     let libraries
     try {
-      h5p = this.h5pjson
+      h5p = this.getJSON('h5p.json')
       content = this.contentjson
       libraries = await this.loadDependencies(h5p.preloadedDependencies)
     } catch (e) {
