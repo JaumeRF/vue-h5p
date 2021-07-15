@@ -11,8 +11,8 @@
   <iframe
     v-else
     ref="iframe"
-    style="width: 100%; height: 100%; border: none;"
     :srcdoc="srcdoc"
+    style="width:100%;"
     @load="addEventHandlers"
   />
 </template>
@@ -145,17 +145,8 @@ export default {
 </html>`
 
     this.loading = false
-    window.addEventListener('resize', this.onResize)
-  },
-  beforeDestroy () {
-    // Unregister the event listener before destroying this Vue instance
-    window.removeEventListener('resize', this.onResize)
   },
   methods: {
-    onResize (event) {
-      this.$emit('resizedwindow', event)
-    },
-
     addEventHandlers () {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on('*', (ev) => {
         this.$emit(ev.type.toLowerCase(), ev.data)

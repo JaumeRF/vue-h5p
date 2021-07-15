@@ -94,7 +94,7 @@ var render = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _vm.loading ? _c("div", [_vm._t("default")], 2) : _vm.error ? _c("div", [_vm._t("error", null, {"error": _vm.error})], 2) : _c("iframe", {ref: "iframe", staticStyle: {"width": "100%", "height": "100%", "border": "none"}, attrs: {"srcdoc": _vm.srcdoc}, on: {"load": _vm.addEventHandlers}});
+  return _vm.loading ? _c("div", [_vm._t("default")], 2) : _vm.error ? _c("div", [_vm._t("error", null, {"error": _vm.error})], 2) : _c("iframe", {ref: "iframe", staticStyle: {"width": "100%"}, attrs: {"srcdoc": _vm.srcdoc}, on: {"load": _vm.addEventHandlers}});
 };
 var staticRenderFns = [];
 function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles2, scopeId, moduleIdentifier, shadowMode) {
@@ -260,15 +260,8 @@ const script = {
   </body>
 </html>`;
     this.loading = false;
-    window.addEventListener("resize", this.onResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
   },
   methods: {
-    onResize(event) {
-      this.$emit("resizedwindow", event);
-    },
     addEventHandlers() {
       this.$refs.iframe.contentWindow.H5P.externalDispatcher.on("*", (ev) => {
         this.$emit(ev.type.toLowerCase(), ev.data);
