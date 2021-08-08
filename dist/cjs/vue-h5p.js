@@ -246,7 +246,7 @@ const script = {
     const contentStyles = styles.map((style) => `<link rel="stylesheet" href="${style}">`).join("\n");
     const contentScripts = scripts.map((script2) => `<script src="${script2}">${endScript}`).join("\n");
     this.srcdoc = `<!doctype html>
-<html class="h5p-iframe">
+<html class="h5p-iframe" >
   <head>
     <base target="_parent">
     <style>${frameStyle}</style>
@@ -256,7 +256,7 @@ const script = {
     ${contentScripts}
   </head>
   <body>
-    <div class="h5p-content" data-content-id="default"/>
+    <div class="h5p-content" style="font-family: 'Montserrat', sans-serif !important;" data-content-id="default"/>
   </body>
 </html>`;
     this.loading = false;
