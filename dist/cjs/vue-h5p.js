@@ -263,9 +263,13 @@ const script = {
   },
   methods: {
     addEventHandlers() {
-      this.$refs.iframe.contentWindow.H5P.externalDispatcher.on("*", (ev) => {
-        this.$emit(ev.type.toLowerCase(), ev.data);
-      });
+      try {
+        this.$refs.iframe.contentWindow.H5P.externalDispatcher.on("*", (ev) => {
+          this.$emit(ev.type.toLowerCase(), ev.data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
     async getJSON(...url) {
       const resp = await fetch(this.path + "/" + url.join("/"), {credentials: "include"});
