@@ -140,7 +140,7 @@ export default {
     ${contentScripts}
   </head>
   <body>
-    <div class="h5p-content" style="font-family: 'Montserrat', sans-serif !important;" data-content-id="default"/>
+    <div class="h5p-content" style="font-family: 'Karla', sans-serif !important;" data-content-id="default"/>
   </body>
 </html>`
 
