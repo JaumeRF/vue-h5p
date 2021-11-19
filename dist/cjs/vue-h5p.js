@@ -257,7 +257,7 @@ const script = {
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <base target="_parent">
     <style>${frameStyle}</style>
-    <style>${this.externalStyle}</style>
+    <link rel="stylesheet" href="${this.externalStyle}">
     ${contentStyles}
     <script>H5PIntegration = ${JSON.stringify(h5pIntegration)};var H5P = H5P || {};H5P.externalEmbed = true;${endScript}
     <script>${frameScript}${endScript}
